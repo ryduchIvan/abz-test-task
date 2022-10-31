@@ -16,8 +16,8 @@ export const Header = () =>{
 						<span className="header__logo-title">Testtask</span>
 					</div>
 					<div className="header__buttons">
-						{/*<Button title="Users"/>
-						<Button title="Sign up"/>*/}
+						<Button title="Users"/>
+						<Button title="Sign up"/>
 					</div>
 				</div>
 			</div>

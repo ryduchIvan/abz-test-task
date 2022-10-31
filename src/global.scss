@@ -2,9 +2,20 @@
 	font-family: "Nunito";
 	src: url(./assets/fonts/Nunito-Regular.ttf);
 }
+@font-face {
+	font-family: "Poppins-bold";
+	src: url(./assets/fonts/Poppins-Bold.ttf);
+}
+@font-face {
+	font-family: "Poppins-light";
+	src: url(./assets/fonts/Poppins-Light.ttf);
+}
+@font-face {
+	font-family: "Poppins-regular";
+	src: url(./assets/fonts/Poppins-Regular.ttf);
+}
 body {
-	font-family: "Nunito";
-	background-color: black;
+	font-family: "Poppins-regular";
 }
 .container {
 	margin: 0px auto;
