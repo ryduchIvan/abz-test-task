@@ -1,0 +1,31 @@
+.header {
+}
+.header__container {
+}
+.container {
+}
+.header__row {
+	height: 37px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.header__logo {
+	display: flex;
+	align-items: center;
+}
+.header__logo-img {
+	width: 30px;
+	height: 24px;
+}
+.header__logo-title {
+	text-transform: uppercase;
+	font-size: 11px;
+	font-weight: 600;
+}
+.header__buttons {
+	display: flex;
+}
+.button {
+	margin-left: 10px;
+}
