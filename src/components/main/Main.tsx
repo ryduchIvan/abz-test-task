@@ -3,16 +3,15 @@ import Cover from  "assets/images/cover.jpg";
 import { Button } from "components/button/Button";
 //CSS
 import "./main.scss";
-
-export const Main = () =>{
-
-
-	return (
+//Components
+import {CardList} from "components/user/CardList";
+export const Main = () =>(
+	(
 		<main className="main">
 			<div className="main__container container">
 				<div className="cover">
 					<div className="cover__content">
-						<h1 className="cover__title">
+					<h1 className="cover__title">
 						Test assignment for front-end developer
 					</h1>
 					<div className="cover__text">
@@ -27,7 +26,8 @@ export const Main = () =>{
 					</div>
 					</div>
 				</div>
+				<CardList/>
 			</div>
 		</main>
 	)
-}
+)
