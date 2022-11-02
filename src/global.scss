@@ -22,6 +22,25 @@ body {
 	margin: 0px auto;
 	max-width: 936px;
 }
+.input {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #d0cfcf;
+	border-radius: 4px;
+	background-color: transparent;
+	&::placeholder {
+		color: #7e7e7e;
+		font-size: 13px;
+	}
+}
+.input__help-text {
+	display: block;
+	text-align: left;
+	font-size: 10px;
+	color: #7e7e7e;
+	margin-left: 10px;
+	margin-top: 2px;
+}
 
 /* Указываем box sizing */
 *,

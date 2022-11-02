@@ -1,0 +1,26 @@
+.radio {
+	display: block;
+	font-size: 13px;
+	padding-left: 1.9em;
+	margin-bottom: 7px;
+}
+.radio__input {
+	appearance: none;
+	position: absolute;
+}
+.radio__box {
+	position: absolute;
+	width: 1.1em;
+	height: 1.1em;
+	border: 1px solid #d0cfcf;
+	border-radius: 50%;
+	background-color: transparent;
+	background-image: none;
+	margin-left: -1.85em;
+	margin-top: 3px;
+}
+.radio__input:checked + .radio__box {
+	background-image: url(../../assets/images/radio.svg);
+	background-size: 100% 100%;
+	border: none;
+}

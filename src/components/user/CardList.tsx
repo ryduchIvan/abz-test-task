@@ -1,33 +1,37 @@
 import "./cardList.scss";
-import {useEffect, useState} from "react";
-import {Users} from "type";
 //Components
 import {Card} from "./Card";
 import { Button } from "components/button/Button";
-export const CardList = () =>{
-	const [users, setUsers] = useState<Users>([]);
+import Preload from "assets/images/preload.svg";
+import { Title } from "components/title/Title";
+import {Users, Status} from "type";
+interface CardListProps {
+	users: Users,
+	page: number,
+	status: Status,
+	nextPage: () => void
+}
+export const CardList = ({users, page, status, nextPage}: CardListProps) =>{
 
-	useEffect(() =>{
-		const loadUsers = async () =>{
-			const reponse = await fetch(`https://frontend-test-assignment-api.abz.agency/api/v1/users?page=1&count=6`);
-			const data = await reponse.json();
-			setUsers(data.users);
-		}
-		loadUsers();
-	}, [])
 	return (
-		<section className="card">
-			<h2 className="card__title">
-				Working with GET request
-			</h2>
+			<>
+			<Title title="Working with GET request"/>
 			<div className="card__list">
 				{
-					users.map((user) => <Card key={user.id} {...user}/>)
+					status === "loading" ? 
+					
+					<img src={Preload} alt="preload" className="card__preload"/> : 
+					
+					users.map((user) => <Card key={user.id} {...user} />)
 				}
 			</div>
-			<div className="card__show-more">
-				<Button title="Show more"/>
-			</div>
-		</section>
+			{
+				page !== 8 ? <div className="card__show-more" onClick={() =>{
+					nextPage();
+				}}>
+					<Button title="Show more"/>
+				</div> : null
+			}
+			</>
 	)
 }

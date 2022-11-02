@@ -1,7 +1,8 @@
 import { User } from "type";
 import "./card.scss";
 
-export const Card = ({id, name, email, phone, position, position_id, registration_timestamp, photo}: User) =>{
+export const Card = ({id, name, email, phone, position, position_id, registration_timestamp, photo} : User) =>{
+
 
 	return (
 		<div className="card__item">

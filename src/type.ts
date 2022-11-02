@@ -10,3 +10,11 @@ export type User = {
 	registration_timestamp: number, 
 	photo: string 
 }
+export type Status = "loading" | "received";
+
+export type newUserDataFileds = {
+  name: string, 
+  email: string, 
+  phone: string,
+  file: string
+}

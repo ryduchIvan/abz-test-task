@@ -1,0 +1,2 @@
+export const URL = "https://frontend-test-assignment-api.abz.agency/api/v1/";
+export const token = "eyJpdiI6ImlKSnFwMjA3VFVwTWFHVTNyTXhhYnc9PSIsInZhbHVlIjoidHlWV2NQVWRRTWhOVzUyYTVrV21ZNUY1VEpCZ3pIZUd1UFFlOEtwczQwNFgzOVVFdlQ0RmtRRHg2dVhSV09NXC85OFJBV05ZdVUyS0VkN3VMVnlpN2t3PT0iLCJtYWMiOiI3NWQ3NTZkOTlmYzZkNDk1ZWI2NGY5NWY5YTlkM2YxOTVmYWUwOWVkNWNkMzYwNTBiNzNiYjkwMzliOTc4YWQ0In0=";
