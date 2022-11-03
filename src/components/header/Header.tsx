@@ -4,10 +4,7 @@ import "./header.scss";
 import Logo from "assets/images/logo.svg";
 //components
 import {Button} from "components/button/Button";
-export const Header = () =>{
-
-
-	return (
+export const Header = () =>(
 		<header className="header">
 			<div className="header__container container">
 				<div className="header__row">
@@ -22,5 +19,4 @@ export const Header = () =>{
 				</div>
 			</div>
 		</header>
-	)
-}
+)

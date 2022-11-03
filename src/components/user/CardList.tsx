@@ -12,7 +12,7 @@ interface CardListProps {
 	nextPage: () => void
 }
 export const CardList = ({users, page, status, nextPage}: CardListProps) =>{
-
+	let lastPage = users.length / page;
 	return (
 			<>
 			<Title title="Working with GET request"/>
@@ -25,11 +25,11 @@ export const CardList = ({users, page, status, nextPage}: CardListProps) =>{
 					users.map((user) => <Card key={user.id} {...user} />)
 				}
 			</div>
-			{
-				page !== 8 ? <div className="card__show-more" onClick={() =>{
+			{/*hide button when we on last page*/
+				lastPage === page  ? <div className="card__show-more" >
+					<Button title="Show more" onClick={() =>{
 					nextPage();
-				}}>
-					<Button title="Show more"/>
+				}}/>
 				</div> : null
 			}
 			</>

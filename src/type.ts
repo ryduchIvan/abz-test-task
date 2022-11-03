@@ -1,6 +1,6 @@
-export type Users = User[];
+export type Users = User[];//type for data from apis
 
-export type User = {
+export type User = {//type for one card
 	id: number, 
 	name: string, 
 	email: string,
@@ -12,9 +12,9 @@ export type User = {
 }
 export type Status = "loading" | "received";
 
-export type newUserDataFileds = {
+export type newUserDataFileds = {//type for new User data
   name: string, 
   email: string, 
   phone: string,
-  file: string
+  file: any
 }

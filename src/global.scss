@@ -1,19 +1,9 @@
+//There are globals styles here, you can use it anywhere
 @font-face {
 	font-family: "Nunito";
 	src: url(./assets/fonts/Nunito-Regular.ttf);
 }
-@font-face {
-	font-family: "Poppins-bold";
-	src: url(./assets/fonts/Poppins-Bold.ttf);
-}
-@font-face {
-	font-family: "Poppins-light";
-	src: url(./assets/fonts/Poppins-Light.ttf);
-}
-@font-face {
-	font-family: "Poppins-regular";
-	src: url(./assets/fonts/Poppins-Regular.ttf);
-}
+
 body {
 	font-family: "Nunito";
 	background-color: #f8f8f8;
@@ -28,11 +18,9 @@ body {
 	border: 1px solid #d0cfcf;
 	border-radius: 4px;
 	background-color: transparent;
-	&::placeholder {
-		color: #7e7e7e;
-		font-size: 13px;
-	}
+	cursor: pointer;
 }
+
 .input__help-text {
 	display: block;
 	text-align: left;
@@ -41,29 +29,45 @@ body {
 	margin-left: 10px;
 	margin-top: 2px;
 }
+.placeholder {
+	position: absolute;
+	top: 12px;
+	left: 8px;
+	color: #7e7e7e;
+	font-size: 13px;
+	cursor: pointer;
+}
+.placeholder-anim {
+	top: -20px;
+	transition: 0.3s all ease-in-out;
+}
+.wrong-text {
+	color: #cb3d40;
+}
+.wrong-input {
+	border: 1px solid #cb3d40;
+}
 
-/* Указываем box sizing */
+//NULL STYLES
 *,
 *::before,
 *::after {
 	box-sizing: border-box;
 }
 
-/* Убираем внутренние отступы */
-ul[class],
-ol[class] {
+ul,
+ol {
 	padding: 0;
 }
 
-/* Убираем внешние отступы */
 body,
 h1,
 h2,
 h3,
 h4,
 p,
-ul[class],
-ol[class],
+ul,
+ol,
 li,
 figure,
 figcaption,
@@ -73,37 +77,24 @@ dd {
 	margin: 0;
 }
 
-/* Выставляем основные настройки по-умолчанию для body */
-body {
-	min-height: 100vh;
-	scroll-behavior: smooth;
-	text-rendering: optimizeSpeed;
-	line-height: 1.5;
-}
-
-/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
-ul[class],
-ol[class] {
+ul,
+ol {
 	list-style: none;
 }
 
-/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
-a:not([class]) {
+a {
 	text-decoration-skip-ink: auto;
 }
 
-/* Упрощаем работу с изображениями */
 img {
 	max-width: 100%;
 	display: block;
 }
 
-/* Указываем понятную периодичность в потоке данных у article*/
 article > * + * {
 	margin-top: 1em;
 }
 
-/* Наследуем шрифты для инпутов и кнопок */
 input,
 button,
 textarea,
@@ -111,7 +102,6 @@ select {
 	font: inherit;
 }
 
-/* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
 @media (prefers-reduced-motion: reduce) {
 	* {
 		animation-duration: 0.01ms !important;

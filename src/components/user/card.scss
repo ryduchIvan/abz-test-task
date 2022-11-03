@@ -22,10 +22,30 @@
 	margin-top: 18px;
 }
 .card__email {
+	position: relative;
+	cursor: pointer;
 }
 .card__phone {
 }
-@media (max-width: 936px) {
+.card__email-popup {
+	background: rgba(0, 0, 0, 0.87);
+	border-radius: 4px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 3px 16px;
+	color: white;
+	position: absolute;
+	top: 20px;
+	right: 0px;
+	opacity: 0;
+}
+.card__email:hover .card__email-popup {
+	transition: all 0.3s ease-in-out;
+	opacity: 1;
+}
+@media (max-width: 767px) {
 	.card__item {
 		flex: 0 1 49%;
 	}

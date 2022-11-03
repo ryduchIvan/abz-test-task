@@ -9,7 +9,9 @@ export const Card = ({id, name, email, phone, position, position_id, registratio
 			<img src={photo} alt="avatar" className="card__img" />
 			<p className="card__name card-text">{name.substring(0,10)}</p>
 			<p className="card__positon card-text">{position}</p>
-			<p className="card__email card-text">{email.substring(0,10)}</p>
+			<p className="card__email card-text">{email.substring(0,10)}
+				<span className="card__email-popup">{email}</span>
+			</p>
 			<p className="card__phone card-text">{phone}</p>
 		</div>
 	)

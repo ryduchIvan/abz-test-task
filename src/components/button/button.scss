@@ -10,4 +10,8 @@
 	width: 80px;
 	font-size: 12px;
 	height: 27px;
+	cursor: pointer;
+	&:hover {
+		background-color: #ffe302;
+	}
 }

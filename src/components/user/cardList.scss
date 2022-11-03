@@ -5,12 +5,18 @@
 	margin-top: 35px;
 }
 .card__show-more {
-	max-width: 80px;
-	margin: 0px auto;
+	display: flex;
+	justify-content: center;
 	margin-top: 20px;
 }
 .card__preload {
 	margin: 0px auto;
 	margin-top: 30px;
 	margin-bottom: 30px;
+}
+@media (max-width: 564px) {
+	.card__list {
+		padding-left: 16px;
+		padding-right: 16px;
+	}
 }
