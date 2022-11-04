@@ -89,9 +89,10 @@ export const RegistrationForm = ({updateUsers}: RegistrationFormProps) =>{
 		}).then((response) => response.json())
 		  .then((data: APIData) =>{ 
 			if (data.success) {
-				console.log("Data success")
 				updateUsers();
 		  }
+		}).catch(error => {
+			alert(error)
 		})
 		reset();
 	}

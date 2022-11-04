@@ -13,6 +13,7 @@ import  { useState, useEffect} from "react";
 import { Popup } from "components/popup/Popup";
 //img
 import SuccessfulImage from "assets/images/successful-image.jpg";
+import { stat } from "fs/promises";
 
 export const Main = () =>{
 	const [users, setUsers] = useState<Users>([]);//state for data array 
@@ -27,11 +28,15 @@ export const Main = () =>{
 	useEffect(() =>{
 		setStatus("loading");
 		const loadUsers = async () =>{
-			const reponse = await fetch(`${URL}users?page=${page}&count=6`);
-			const data: APIData = await reponse.json();
-			setUsers(data.users);
-			setNextUrl(data.links.next_url);
-			setStatus("received");
+			try {
+				const reponse = await fetch(`${URL}users?page=${page}&count=6`);
+				const data: APIData = await reponse.json();
+				setUsers(data.users);
+				setNextUrl(data.links.next_url);
+				setStatus("received");	
+			} catch (error) {
+				setStatus("rejected");
+			}
 		}
 		loadUsers();
 	}, [page, successfulResponse]);

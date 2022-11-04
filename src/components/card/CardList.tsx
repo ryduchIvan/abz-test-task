@@ -20,11 +20,14 @@ export const CardList = ({users, page, status, nextPage, nextUrl}: CardListProps
 			<Title title="Working with GET request"/>
 			<div className="card__list">
 				{
-					status === "loading" ? 
+					status === "loading" ? <img src={Preload} alt="preload" className="card__preload"/> : null 
 					
-					<img src={Preload} alt="preload" className="card__preload"/> : 
-					
-					users.map((user) => <Card key={user.id} {...user} />)
+				}
+				{
+					status === "rejected" ? <h2 className="card__error">Someting went wrong. Pleaser reload site</h2> : null
+				}
+				{
+					status === "received" ? users.map((user) => <Card key={user.id} {...user} />) : null
 				}
 			</div>
 			{/*hide button when we on last page*/

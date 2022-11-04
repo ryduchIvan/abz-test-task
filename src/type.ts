@@ -20,7 +20,7 @@ export type User = {//type for one card
 	registration_timestamp: number, 
 	photo: string 
 }
-export type Status = "loading" | "received";
+export type Status = "loading" | "received" | "rejected";
 
 export type newUserDataFileds = {//type for new User data
   name: string, 
