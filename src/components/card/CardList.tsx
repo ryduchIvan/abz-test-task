@@ -4,7 +4,7 @@ import {Card} from "./Card";
 import { Button } from "components/button/Button";
 import Preload from "assets/images/preload.svg";
 import { Title } from "components/title/Title";
-import {Users, Status} from "type";
+import {Users, Status} from "types/index";
 interface CardListProps {
 	users: Users,
 	page: number,
@@ -24,7 +24,7 @@ export const CardList = ({users, page, status, nextPage, nextUrl}: CardListProps
 					
 				}
 				{
-					status === "rejected" ? <h2 className="card__error">Someting went wrong. Pleaser reload site</h2> : null
+					status === "rejected" ? <h2 className="card__error">Someting went wrong. Please reload site</h2> : null
 				}
 				{
 					status === "received" ? users.map((user) => <Card key={user.id} {...user} />) : null

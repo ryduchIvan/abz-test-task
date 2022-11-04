@@ -1,7 +1,7 @@
 //Types
-import {Users, Status, APIData} from "type";
+import {Users, Status, APIData} from "types/index";
 //Default URL
-import {URL} from "api";
+import {defaultURL} from "../defaultURL";
 //CSS
 import "./main.scss";
 //Components
@@ -13,7 +13,7 @@ import  { useState, useEffect} from "react";
 import { Popup } from "components/popup/Popup";
 //img
 import SuccessfulImage from "assets/images/successful-image.jpg";
-import { stat } from "fs/promises";
+
 
 export const Main = () =>{
 	const [users, setUsers] = useState<Users>([]);//state for data array 
@@ -29,7 +29,7 @@ export const Main = () =>{
 		setStatus("loading");
 		const loadUsers = async () =>{
 			try {
-				const reponse = await fetch(`${URL}users?page=${page}&count=6`);
+				const reponse = await fetch(`${defaultURL}users?page=${page}&count=6`);
 				const data: APIData = await reponse.json();
 				setUsers(data.users);
 				setNextUrl(data.links.next_url);

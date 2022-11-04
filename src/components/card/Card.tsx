@@ -1,4 +1,4 @@
-import { User } from "type";
+import { User } from "types/index";
 import "./card.scss";
 
 export const Card = ({id, name, email, phone, position, position_id, registration_timestamp, photo} : User) =>{

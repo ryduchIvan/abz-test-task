@@ -5,21 +5,23 @@ import { useForm} from "react-hook-form";
 import React, { useState , useEffect} from "react";
 //Types
 import {SubmitHandler} from "react-hook-form";
-import { APIData, PositonsApi, tokenData, User} from "type";
-import { newUserDataFileds } from "type";
+import { APIData, PositonsApi, Token, newUserDataFileds} from "types/index";
 //Patterns
 import { emailPatter, phonePatter, namePetter} from "RegExr";
 //Components
 import { Title } from "components/title/Title";
 import { Radio } from "components/Radio/Radio";
 import { Button } from "components/button/Button";
+//default url
+import {defaultURL} from "../defaultURL";
 
 interface RegistrationFormProps {
 	updateUsers: () => void
 }
+
 const sendNewUser = async (formData: FormData, callBack: () => void, token: string ) =>{
 	try {
-		const response  = await fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users', {
+		const response  = await fetch(`${defaultURL}users`, {
 			method: "POST",
 			body: formData, 
 			headers: {
@@ -59,7 +61,7 @@ export const RegistrationForm = ({updateUsers}: RegistrationFormProps) =>{
 	//take any instruments from react-hook-form
 	useEffect(() => {
 		const getPositionId = async( ) =>{
-			const reponse = await fetch(`https://frontend-test-assignment-api.abz.agency/api/v1/positions`);
+			const reponse = await fetch(`${defaultURL}positions`);
 			const data: PositonsApi = await reponse.json();
 			data.positions.forEach((elem) =>{
 				if (elem.name === position) {
@@ -73,17 +75,16 @@ export const RegistrationForm = ({updateUsers}: RegistrationFormProps) =>{
 	useEffect(() =>{
 		const getNewToken = async () =>{
 			try {
-				const reponse = await fetch("https://frontend-test-assignment-api.abz.agency/api/v1/token")
-				const data: tokenData = await reponse.json();
+				const reponse = await fetch(`${defaultURL}token`)
+				const data: Token = await reponse.json();
 				setToken(data.token);	
 			} catch (error) {
-				alert(`Token error. Reload cite`)
+				//alert(`Token error. Reload cite`)
 			}
 		}
 		getNewToken();
 	}, [])
 	//get new token
-
 	const onSumbit: SubmitHandler<newUserDataFileds> = (data) =>{
 		let img = new Image();
 		let minxWidth = 70;
@@ -100,7 +101,8 @@ export const RegistrationForm = ({updateUsers}: RegistrationFormProps) =>{
 		if ( data.file[0].size > maxAllowedSize) {
 			alert("Photo size cannot be more than 5mb")
 			//if the photo size more than 5 mb arelt
-		}
+		}	
+
 		img.src = URL.createObjectURL(data.file[0]);
 
 		img.onload = () =>{
@@ -112,7 +114,7 @@ export const RegistrationForm = ({updateUsers}: RegistrationFormProps) =>{
 			//if the photo size is less than 70px X 70px alert
 		}
 		sendNewUser(formData, updateUsers, token);
-		//reset();
+		reset();
 	}
 	//post request 
 
