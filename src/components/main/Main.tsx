@@ -34,7 +34,6 @@ export const Main = () =>{
 			setStatus("received");
 		}
 		loadUsers();
-		console.log("Перерендер");
 	}, [page, successfulResponse]);
 
 	const updateUsers = () =>{

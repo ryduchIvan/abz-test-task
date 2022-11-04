@@ -2,7 +2,7 @@
 import "./registarationForm.scss";
 //Hooks
 import { useForm} from "react-hook-form";
-import React, { useState , useEffect, useRef} from "react";
+import React, { useState , useEffect} from "react";
 //Types
 import {SubmitHandler} from "react-hook-form";
 import { APIData, PositonsApi} from "type";
@@ -15,9 +15,12 @@ import { Radio } from "components/Radio/Radio";
 import { Button } from "components/button/Button";
 //token for headers 
 import { token } from "api";
+
 interface RegistrationFormProps {
 	updateUsers: () => void
 }
+
+
 export const RegistrationForm = ({updateUsers}: RegistrationFormProps) =>{
 	const [position, setPosition] = useState<string>("Lawyer");
 	const [positionId, setPostionId] = useState<number>(1);
@@ -25,13 +28,11 @@ export const RegistrationForm = ({updateUsers}: RegistrationFormProps) =>{
 	const [email, setEmail] = useState<string>();
 	const [name, setName] = useState<string>();
 	const [phone, setPhone] = useState<string>();
+	const [animPlaceholder1, setAnimPlaceholder1] = useState<boolean>(false);
+	const [animPlaceholder2, setAnimPlaceholder2] = useState<boolean>(false);
+	const [animPlaceholder3, setAnimPlaceholder3] = useState<boolean>(false);
 	//states for placeholder animation
 
-	const maxAllowedSize = 5 * 1024 * 1024;
-	const minAllowedSize = 1333;
-	//limit photos size
-
-	const fileErrorRef = useRef<HTMLDivElement>(null);
 
 	const {register, formState: {errors, isValid}, handleSubmit, reset} = useForm<newUserDataFileds>({
 		mode: "onBlur",
@@ -52,13 +53,33 @@ export const RegistrationForm = ({updateUsers}: RegistrationFormProps) =>{
 	//get position id
 
 	const onSumbit: SubmitHandler<newUserDataFileds> = (data) =>{
+		let img = new Image();
+		let minxWidth = 70;
+		let minHeight = 70;
+		let maxAllowedSize = 5000000;
+		//variabels for validation photo size
 		let formData = new FormData();
 		formData.append('position_id', positionId.toString()); 
 		formData.append('name', data.name);
 		formData.append('email', data.email); 
 		formData.append('phone', data.phone);
-		formData.append('photo', data.file[0]);	
-	
+		formData.append('photo', data.file[0]);
+
+		if ( data.file[0].size > maxAllowedSize) {
+			alert("Photo size cannot be more than 5mb")
+			//if the photo size more than 5 mb arelt
+		}
+		img.src = URL.createObjectURL(data.file[0]);
+
+		img.onload = () =>{
+			let imgWidth = img.width;
+			let imgHeight = img.height;
+			if (imgWidth < minxWidth || imgHeight < minHeight) {
+				alert('Photo must be at least 70px X 70px')
+			}
+			//if the photo size is less than 70px X 70px alert
+		}
+
 		fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users', {
 			method: "POST",
 			body: formData, 
@@ -70,14 +91,8 @@ export const RegistrationForm = ({updateUsers}: RegistrationFormProps) =>{
 			if (data.success) {
 				console.log("Data success")
 				updateUsers();
-		  } else {
-			if (fileErrorRef.current) {
-				fileErrorRef.current.innerHTML = `<p class="wrong-text">Invaild photo size</p>`
-			}
 		  }
 		})
-		  .catch(error => {
-		  });
 		reset();
 	}
 	//post request 
@@ -90,7 +105,7 @@ export const RegistrationForm = ({updateUsers}: RegistrationFormProps) =>{
 		<>
 			<Title title="Working with POST request"  />
 			<form action="" className="registration__form" onSubmit={handleSubmit(onSumbit)}>
-				<div className="registration__input" >
+				<div className="registration__input" onClick={() =>{setAnimPlaceholder1(true)}}>
 					<input className={`${errors.name && "wrong-input"} input`}  
 					{...register('name', {
 						required: "Name must be filled",
@@ -113,7 +128,7 @@ export const RegistrationForm = ({updateUsers}: RegistrationFormProps) =>{
 					/>
 					<label className={
 						/* if input does not empty , placeholder gets anim class. If validation wrong placeholder gets wrong-text class */	
-						`${name ? "placeholder-anim " : ""}
+						`${name || animPlaceholder1 ? "placeholder-anim " : ""}
 						registration__placeholder-big placeholder 
 					${errors.name ? "wrong-text" : ""}` } htmlFor="name">Your Name</label>
 					{/*If validation wrong , help text gets wrong-text class */
@@ -121,7 +136,7 @@ export const RegistrationForm = ({updateUsers}: RegistrationFormProps) =>{
 					<p className="input__help-text wrong-text">{errors?.name?.message.toString()}</p> : 
 					<p className="input__help-text">Ivan</p>}
 				</div>
-				<div className="registration__input" >
+				<div className="registration__input" onClick={() =>{setAnimPlaceholder2(true)}}>
 					<input className={`${errors.email && "wrong-input"} input`}  {...register("email", {
 						required: "Email must be filled",
 						pattern: {
@@ -134,7 +149,7 @@ export const RegistrationForm = ({updateUsers}: RegistrationFormProps) =>{
 					})}/>
 					<label className={
 						/* if input does not empty , placeholder gets anim class. If validation wrong placeholder gets wrong-text class */
-						`${ email  ? "placeholder-anim " : ""}
+						`${ email || animPlaceholder2 ? "placeholder-anim " : ""}
 						registration__placeholder placeholder 
 						${errors.email ? "wrong-text" : ""}` } htmlFor="name">Email</label>
 					{/*If validation wrong , help text gets wrong-text class */
@@ -142,7 +157,7 @@ export const RegistrationForm = ({updateUsers}: RegistrationFormProps) =>{
 					<p className="input__help-text wrong-text">{errors?.email?.message.toString()}</p> : 
 					<p className="input__help-text">Email</p>}
 				</div>
-				<div className="registration__input">
+				<div className="registration__input" onClick={() =>{setAnimPlaceholder3(true)}}>
 					<input className={`${errors.phone && "wrong-input"} input`}  {...register("phone", {
 						required: "Phone must be filled",
 						pattern: {
@@ -154,7 +169,7 @@ export const RegistrationForm = ({updateUsers}: RegistrationFormProps) =>{
 						},
 					})}/>
 					<label className={/*if input does not empty , placeholder gets anim class. If validation wrong placeholder gets wrong-text class*/
-						`${phone ? "placeholder-anim " : ""}
+						`${phone || animPlaceholder3 ? "placeholder-anim " : ""}
 						registration__placeholder placeholder 
 						${errors.phone ? "wrong-text" : ""}` } htmlFor="name">Phone</label>
 					{/*If validation wrong , help text gets wrong-text class */
@@ -175,8 +190,9 @@ export const RegistrationForm = ({updateUsers}: RegistrationFormProps) =>{
 					<label className="registration__file-label">
 						<span className="registration__file-text">Upload</span>
 						<div className="registration__file-filed">Upload your photo</div>
-						<input className="registration__file-input" type="file" accept=".jpg, .jpeg" {...register("file", {
-						required: "File must be upload"
+						<input className="registration__file-input" type="file" accept=".jpg, .jpeg" 
+						{...register("file", {
+						required: "Photo must be upload",
 					})} />
 					</label>
 						{/*If validation wrong , create help text */

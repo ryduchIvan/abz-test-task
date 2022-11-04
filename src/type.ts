@@ -28,7 +28,7 @@ export type newUserDataFileds = {//type for new User data
   phone: string,
   file: any
 }
-export type FileEERER = {
+export type File = {
 	lastModified: number,
 	lastModifiedDate: string,
 	name: string,
