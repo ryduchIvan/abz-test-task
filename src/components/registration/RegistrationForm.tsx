@@ -5,7 +5,7 @@ import { useForm} from "react-hook-form";
 import React, { useState , useEffect} from "react";
 //Types
 import {SubmitHandler} from "react-hook-form";
-import { APIData, PositonsApi} from "type";
+import { APIData, PositonsApi, tokenData, User} from "type";
 import { newUserDataFileds } from "type";
 //Patterns
 import { emailPatter, phonePatter, namePetter} from "RegExr";
@@ -13,13 +13,31 @@ import { emailPatter, phonePatter, namePetter} from "RegExr";
 import { Title } from "components/title/Title";
 import { Radio } from "components/Radio/Radio";
 import { Button } from "components/button/Button";
-//token for headers 
-import { token } from "api";
 
 interface RegistrationFormProps {
 	updateUsers: () => void
 }
-
+const sendNewUser = async (formData: FormData, callBack: () => void, token: string ) =>{
+	try {
+		const response  = await fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users', {
+			method: "POST",
+			body: formData, 
+			headers: {
+				"Token": token,
+			}
+		});
+		const data: APIData = await response.json();
+		if(data.success){
+			callBack()
+		} else {
+			alert(data.message)
+		}
+		
+	} catch (error) {
+		alert(error)
+	}
+}
+//post request
 
 export const RegistrationForm = ({updateUsers}: RegistrationFormProps) =>{
 	const [position, setPosition] = useState<string>("Lawyer");
@@ -33,6 +51,7 @@ export const RegistrationForm = ({updateUsers}: RegistrationFormProps) =>{
 	const [animPlaceholder3, setAnimPlaceholder3] = useState<boolean>(false);
 	//states for placeholder animation
 
+	const [token, setToken] = useState<string>("eyJpdiI6IkVFWjF3TGZNTTFwWHliZjArSmplakE9PSIsInZhbHVlIjoiRW1DXC9ZXC9Fenc0eEplRDFZSTRqMVhaSFozSWN1MjA2bW9qUThDWWtkZ3ZOdzJXdWZ6eW9YS1A4bEY0d0pPclpHWVZabHc1OVc5dDFWRTFpbnpNR3BoUT09IiwibWFjIjoiYjQ0MDYzOWRhZjAyNTVkMDZiMGYxMWZkYWZjOGI2YzJlMDRhOTU3ZjkxNTUxZDQ1MTYxZmExYjg0ZjIwZmNmOCJ9")
 
 	const {register, formState: {errors, isValid}, handleSubmit, reset} = useForm<newUserDataFileds>({
 		mode: "onBlur",
@@ -51,6 +70,19 @@ export const RegistrationForm = ({updateUsers}: RegistrationFormProps) =>{
 		getPositionId();
 	}, [position]);
 	//get position id
+	useEffect(() =>{
+		const getNewToken = async () =>{
+			try {
+				const reponse = await fetch("https://frontend-test-assignment-api.abz.agency/api/v1/token")
+				const data: tokenData = await reponse.json();
+				setToken(data.token);	
+			} catch (error) {
+				alert(`Token error. Reload cite`)
+			}
+		}
+		getNewToken();
+	}, [])
+	//get new token
 
 	const onSumbit: SubmitHandler<newUserDataFileds> = (data) =>{
 		let img = new Image();
@@ -79,22 +111,8 @@ export const RegistrationForm = ({updateUsers}: RegistrationFormProps) =>{
 			}
 			//if the photo size is less than 70px X 70px alert
 		}
-
-		fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users', {
-			method: "POST",
-			body: formData, 
-			headers: {
-				"Token": token,
-			}
-		}).then((response) => response.json())
-		  .then((data: APIData) =>{ 
-			if (data.success) {
-				updateUsers();
-		  }
-		}).catch(error => {
-			alert(error)
-		})
-		reset();
+		sendNewUser(formData, updateUsers, token);
+		//reset();
 	}
 	//post request 
 

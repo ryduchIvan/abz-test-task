@@ -5,7 +5,8 @@ export type APIData = {
 	count: number, 
 	page: number, 
 	links: Links,
-	users: Users
+	users: Users,
+	message?:string
 }
 
 export type Users = User[];//type for data from apis
@@ -28,15 +29,12 @@ export type newUserDataFileds = {//type for new User data
   phone: string,
   file: any
 }
-export type File = {
-	lastModified: number,
-	lastModifiedDate: string,
-	name: string,
-	size: number, 
-	type: string,
-	webkitRelativePath: string
 
+export type tokenData = {
+	success: boolean,
+	token: string
 }
+
 export type PositonsApi = {
 	success: boolean,
 	positions: Position[]
