@@ -1,20 +1,26 @@
 //Types
-import {Users, Status} from "type";
+import {Users, Status, APIData} from "type";
 //Default URL
 import {URL} from "api";
 //CSS
 import "./main.scss";
 //Components
-import {CardList} from "components/user/CardList";
+import {CardList} from "components/card/CardList";
 import { RegistrationForm } from "components/registration/RegistrationForm";
 import { Button } from "components/button/Button";
 //Hooks
 import  { useState, useEffect} from "react";
+import { Popup } from "components/popup/Popup";
+//img
+import SuccessfulImage from "assets/images/successful-image.jpg";
 
 export const Main = () =>{
 	const [users, setUsers] = useState<Users>([]);//state for data array 
 	const [page , setPage] = useState<number>(1);
+	const [nextUrl, setNextUrl] = useState<null | string>(null);
 	const [status, setStatus] = useState<Status>("loading");
+	const [successfulResponse, setSuccessfulResponse] = useState<boolean>(false);
+	//state for updating users
 	const nextPage = () =>{
 		setPage(prev => prev + 1);
 	}
@@ -22,13 +28,22 @@ export const Main = () =>{
 		setStatus("loading");
 		const loadUsers = async () =>{
 			const reponse = await fetch(`${URL}users?page=${page}&count=6`);
-			const data = await reponse.json();
+			const data: APIData = await reponse.json();
 			setUsers(data.users);
+			setNextUrl(data.links.next_url);
 			setStatus("received");
 		}
 		loadUsers();
-	}, [page]);
+		console.log("Перерендер");
+	}, [page, successfulResponse]);
 
+	const updateUsers = () =>{
+		setSuccessfulResponse(true);
+		setPage(1);
+	}
+	const closePopup = () =>{
+		setSuccessfulResponse(false)
+	}
 
 	return(
 		<main className="main">
@@ -51,12 +66,15 @@ export const Main = () =>{
 					</div>
 				</section>
 				<section className="main__card">
-					<CardList status={status} nextPage={nextPage} users={users} page={page}/>
+					<CardList status={status} nextPage={nextPage} users={users} page={page} nextUrl={nextUrl}/>
 				</section>
 				<section className="main__registation">
-					<RegistrationForm />
+					<RegistrationForm updateUsers={updateUsers}/>
 				</section>
 			</div>
+			{
+				successfulResponse ? <Popup src={SuccessfulImage} title="User successfully registered" closePopup={closePopup}/>: null 
+			}
 		</main>
 	)
 }

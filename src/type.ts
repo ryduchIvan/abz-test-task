@@ -1,3 +1,13 @@
+export type APIData = {
+	success: boolean,
+	total_pages: number,
+	total_users: number,
+	count: number, 
+	page: number, 
+	links: Links,
+	users: Users
+}
+
 export type Users = User[];//type for data from apis
 
 export type User = {//type for one card
@@ -17,4 +27,27 @@ export type newUserDataFileds = {//type for new User data
   email: string, 
   phone: string,
   file: any
+}
+export type FileEERER = {
+	lastModified: number,
+	lastModifiedDate: string,
+	name: string,
+	size: number, 
+	type: string,
+	webkitRelativePath: string
+
+}
+export type PositonsApi = {
+	success: boolean,
+	positions: Position[]
+}
+
+type Position = {
+	id: number, 
+	name: string
+}
+
+type Links = {
+	next_url: string | null,
+	prev_url: string | null
 }

@@ -9,10 +9,12 @@ interface CardListProps {
 	users: Users,
 	page: number,
 	status: Status,
-	nextPage: () => void
+	nextPage: () => void,
+	nextUrl: null | string
 }
-export const CardList = ({users, page, status, nextPage}: CardListProps) =>{
-	let lastPage = users.length / page;
+export const CardList = ({users, page, status, nextPage, nextUrl}: CardListProps) =>{
+	let lastPage = users.length / 6;
+
 	return (
 			<>
 			<Title title="Working with GET request"/>
@@ -26,7 +28,7 @@ export const CardList = ({users, page, status, nextPage}: CardListProps) =>{
 				}
 			</div>
 			{/*hide button when we on last page*/
-				lastPage === page  ? <div className="card__show-more" >
+				nextUrl  ? <div className="card__show-more" >
 					<Button title="Show more" onClick={() =>{
 					nextPage();
 				}}/>

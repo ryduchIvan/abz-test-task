@@ -19,6 +19,9 @@ body {
 	border-radius: 4px;
 	background-color: transparent;
 	cursor: pointer;
+	&:focus {
+		outline: none;
+	}
 }
 
 .input__help-text {
@@ -33,13 +36,18 @@ body {
 	position: absolute;
 	top: 12px;
 	left: 8px;
+	width: 48px;
 	color: #7e7e7e;
 	font-size: 13px;
 	cursor: pointer;
+	background-color: transparent;
+	transition: 0.3s all ease-in-out;
 }
 .placeholder-anim {
-	top: -20px;
+	top: -10px;
 	transition: 0.3s all ease-in-out;
+	background-color: #f8f8f8;
+	display: block;
 }
 .wrong-text {
 	color: #cb3d40;

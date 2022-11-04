@@ -7,7 +7,6 @@
 	margin-top: 24px;
 	position: relative;
 }
-
 .registration__btn {
 	text-align: left;
 	margin-top: 16px;
@@ -55,6 +54,10 @@
 }
 .registration__submit {
 	margin-top: 40px;
+	margin-bottom: 100px;
 	display: flex;
 	justify-content: center;
+}
+.registration__placeholder-big {
+	width: 75px;
 }
