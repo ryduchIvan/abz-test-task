@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/abz-test-task/static/css/main.0dbcf6d0.css",
+    "main.js": "/abz-test-task/static/js/main.6bac1ccd.js",
+    "static/js/787.f5104f72.chunk.js": "/abz-test-task/static/js/787.f5104f72.chunk.js",
+    "static/media/cover.jpg": "/abz-test-task/static/media/cover.09863c21debdf17eca4d.jpg",
+    "static/media/Nunito-Regular.ttf": "/abz-test-task/static/media/Nunito-Regular.99a3b019e7727ac19479.ttf",
+    "static/media/successful-image.jpg": "/abz-test-task/static/media/successful-image.c94ecbdf55d303e52ab4.jpg",
+    "static/media/logo.svg": "/abz-test-task/static/media/logo.a054b0f9b2abf4e57c1eb6927dc48456.svg",
+    "index.html": "/abz-test-task/index.html",
+    "static/media/preload.svg": "/abz-test-task/static/media/preload.1657697a0a79f4ebb75c63eb31b1e7d4.svg",
+    "static/media/radio.svg": "/abz-test-task/static/media/radio.af42a3ff810118680dbe.svg",
+    "main.0dbcf6d0.css.map": "/abz-test-task/static/css/main.0dbcf6d0.css.map",
+    "main.6bac1ccd.js.map": "/abz-test-task/static/js/main.6bac1ccd.js.map",
+    "787.f5104f72.chunk.js.map": "/abz-test-task/static/js/787.f5104f72.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0dbcf6d0.css",
+    "static/js/main.6bac1ccd.js"
+  ]
+}
