@@ -13,7 +13,7 @@ interface CardListProps {
 	nextUrl: null | string
 }
 export const CardList = ({users, page, status, nextPage, nextUrl}: CardListProps) =>{
-	let lastPage = users.length / 6;
+	//let lastPage = users.length / 6;
 
 	return (
 			<>
