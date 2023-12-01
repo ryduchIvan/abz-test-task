@@ -1,9 +1,12 @@
+@import "src/style/mixins";
+
 .card__item {
 	flex: 0 1 32%;
 	padding: 20px;
 	background-color: white;
 	margin-bottom: 17px;
 	border-radius: 10px;
+	overflow: hidden;
 }
 .card__img {
 	display: block;
@@ -17,6 +20,7 @@
 }
 .card__name {
 	margin-top: 15px;
+	@include ellipsis
 }
 .card__positon {
 	margin-top: 18px;
@@ -24,6 +28,7 @@
 .card__email {
 	position: relative;
 	cursor: pointer;
+	@include ellipsis
 }
 .card__phone {
 }

@@ -31,7 +31,7 @@ export const CardList = ({users, page, status, nextPage, nextUrl}: CardListProps
 				}
 			</div>
 			{/*hide button when we on last page*/
-				nextUrl  ? <div className="card__show-more" >
+				nextUrl && status === 'received'  ? <div className="card__show-more" >
 					<Button title="Show more" onClick={() =>{
 					nextPage();
 				}}/>
